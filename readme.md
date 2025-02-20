@@ -16,3 +16,5 @@ case 3 - next is given but res.send is given in the first route handler as well 
 case 4 - next is given before res.send in the first route handler -- error will come just as case 2 but the response will be send from second route handler becase next is given before the res.send in the first route handler
 case 5 - there are couple of route handlers but res.send is not given anywhere so the request will hang just like case 1
 case 6 - next is given in all the route handlers but res.send is not given (in case 5 the next was not given in the last route hanlder so the request got hanged) but in this case since next is there in the last route handler as well, we will get 404 path not found bcz next is given in the last router and there is not res.send so it will try to find the next route handler which if missing will lead to this 404 resp from server
+
+we can make route handlers as array as well.. app.use("/route, [routehandler1, routehandler2], routehandler3, [routehandler4, routehandler5])
