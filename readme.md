@@ -20,3 +20,5 @@ case 6 - next is given in all the route handlers but res.send is not given (in c
 we can make route handlers as array as well.. app.use("/route, [routehandler1, routehandler2], routehandler3, [routehandler4, routehandler5])
 
 Anothe way/syntax of write route handlers
+
+what is a middleware? How expressJs handles request behind the scene
