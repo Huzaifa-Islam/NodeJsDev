@@ -22,3 +22,5 @@ we can make route handlers as array as well.. app.use("/route, [routehandler1, r
 Anothe way/syntax of write route handlers
 
 what is a middleware? How expressJs handles request behind the scene
+
+Check the diff btw app.use and app.all

@@ -2,26 +2,25 @@ const express = require("express");
 
 const app = express();
 
-app.get("/admin/getAllData", (req, res, next) => {
-  //check if the request is authorised
-  const token = "xyz";
-  const isAdminAuthorized = token === "xyz";
-  if (isAdminAuthorized) {
-    res.send("All Data sent");
-  } else {
-    res.status(401).send("unauthorized request");
-  }
+//Auth middleware for all requests GET, POST, etc for apis starting with /admin
+app.use("/admin", (req,res,next)=>{
+    const token = "xyz";
+    const isAdminAuthorized = token === "xyz";
+    if (isAdminAuthorized){
+        console.log("authorized")
+        next()
+    }  
+    else{
+        res.status(401).send("unauthorized request");
+    }
+})
+
+app.get("/admin/getAllData",  (req, res, next) => {
+    res.send("added a user")
 });
 
 app.get("/admin/deleteUser", (req, res) => {
-  //check if the request is authorised
-  const token = "xyz";
-  const isAdminAuthorized = token === "xyz";
-  if (isAdminAuthorized) {
     res.send("Deleted a user");
-  } else {
-    res.status(401).send("unauthorized request");
-  }
   
 });
 
