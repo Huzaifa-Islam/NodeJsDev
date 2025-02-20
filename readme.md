@@ -24,3 +24,9 @@ Anothe way/syntax of write route handlers
 what is a middleware? How expressJs handles request behind the scene
 
 Check the diff btw app.use and app.all
+
+we should always put our code in try catch block
+
+Error handling for all kind of requests can be done in app.use("/",(err,req,res,next)=>{
+    //write the code to handle error in a decent way
+})
