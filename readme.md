@@ -35,3 +35,9 @@ Order of routes matter a lot. So please be careful..
 
 Lets connect our application with a database
 we will use Mongoose to connect application to db and for query purposes ==> npm i mongoose
+
+So we should use async await to write the connect code to db
+we have a connection string that we are using to connect to the cluster but to reference a specific database we need to write /devTinder to refer to the specific database name
+
+So the way we have written the code to connect to db is not correct there is one issue. -> we are bringing up the server first and then connecting to db. What if while the db is not up and user tried to access some info from the db it will not be correct. So we should first establish a db connection and then start the server.
+So once db connection is successfully established we will start the server in the success case
