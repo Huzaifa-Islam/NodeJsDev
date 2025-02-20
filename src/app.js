@@ -4,8 +4,13 @@ const app = express();
 
 app.use(
     "/user",
-    (req,res)=>{
+    (req,res,next)=>{
         console.log("Handling route user 1!!");
+        next();
+    },
+    (req,res)=>{
+        console.log("Handling route user 2!!");
+        res.send("response from 2nd route handler ")
     }
 )
 

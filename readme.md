@@ -11,3 +11,4 @@ Install nodemon so that server restart automatically on any change--> npm i -g n
 
 Route Handlers scenarios:
 case 1 - where request will hang in btw as the res.send is not given to send back the response
+case 2 - next is given and in the second route handler the res.send is given
