@@ -32,3 +32,6 @@ Error handling for all kind of requests can be done in app.use("/",(err,req,res,
 })
 
 Order of routes matter a lot. So please be careful..
+
+Lets connect our application with a database
+we will use Mongoose to connect application to db and for query purposes ==> npm i mongoose
