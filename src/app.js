@@ -6,6 +6,7 @@ app.use(
     "/user",
     (req,res,next)=>{
         console.log("Handling route user 1!!");
+        res.send("response from 1st route handler ")
         next();
     },
     (req,res)=>{
