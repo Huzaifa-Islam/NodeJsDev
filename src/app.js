@@ -7,11 +7,11 @@ app.use(
     (req,res,next)=>{
         console.log("Handling route user 1!!");
         next();
-        res.send("response from 1st route handler ")
+       // res.send("response from 1st route handler ")
     },
     (req,res)=>{
         console.log("Handling route user 2!!");
-        res.send("response from 2nd route handler ")
+        //res.send("response from 2nd route handler ")
     }
 )
 

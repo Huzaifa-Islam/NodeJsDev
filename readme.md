@@ -14,3 +14,4 @@ case 1 - where request will hang in btw as the res.send is not given to send bac
 case 2 - next is given and in the second route handler the res.send is given 
 case 3 - next is given but res.send is given in the first route handler as well (next is given after res.send) - error will come in the console althought he server will respond properly 
 case 4 - next is given before res.send in the first route handler -- error will come just as case 2 but the response will be send from second route handler becase next is given before the res.send in the first route handler
+case 5 - there are couple of route handlers but res.send is not given anywhere so the request will hang just like case 1
