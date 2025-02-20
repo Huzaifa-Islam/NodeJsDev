@@ -9,9 +9,10 @@ app.use(
         next();
        // res.send("response from 1st route handler ")
     },
-    (req,res)=>{
+    (req,res,next)=>{
         console.log("Handling route user 2!!");
         //res.send("response from 2nd route handler ")
+        next()
     }
 )
 
