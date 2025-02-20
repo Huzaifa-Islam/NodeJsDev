@@ -8,3 +8,6 @@ instead of using http module provided by node, we will use Express which is wrap
 To install --> npm i express
 
 Install nodemon so that server restart automatically on any change--> npm i -g nodemon 
+
+Route Handlers scenarios:
+case 1 - where request will hang in btw as the res.send is not given to send back the response
