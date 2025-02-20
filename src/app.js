@@ -15,8 +15,13 @@ app.get("/admin/deleteUser", (req, res) => {
 });
 
 app.get("/user/getUserData", userAuth, (req,res,next)=>{
-    throw new Error("sdkjfn"); //throwing error forcefully
-    res.send("User data sent")
+    try{
+        throw new Error("sdkjfn"); //throwing error forcefully
+        res.send("User data sent")    
+    }
+    catch(err){
+        res.status(500).send("Some error occured contact support team")
+    }
 })
 
 //Error Handling
