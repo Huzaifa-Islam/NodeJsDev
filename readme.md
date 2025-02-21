@@ -47,3 +47,11 @@ Now lets add a user to a db using this model
 whenever we do anything in the db (like add/delete a data) it will always return a promise to use async and await
 created a signup api call to add a data to user. Alwasy wrap things in try catch block to handle the errors properly.
 use postmane to call the signup api and see if the data is added in the mongodb. 
+devTinder(databse)--users(collection)--documents(user which gets added)--fields(name, emailId, pwd that the document contains)
+Two fields _id and __v is added by mongo db on its own
+
+How to push dynamic data to api.. Meaning the body data in the post call from the postman
+
+Diff btw javascript object and json
+
+To read the body data from the request -- we need a middleware (express.json) which we will use for all the apis to get the body in json format. if we dont use it and try to log req.body we will get undefined
