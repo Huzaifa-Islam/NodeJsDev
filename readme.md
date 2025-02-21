@@ -41,3 +41,9 @@ we have a connection string that we are using to connect to the cluster but to r
 
 So the way we have written the code to connect to db is not correct there is one issue. -> we are bringing up the server first and then connecting to db. What if while the db is not up and user tried to access some info from the db it will not be correct. So we should first establish a db connection and then start the server.
 So once db connection is successfully established we will start the server in the success case
+
+Now we will create a schema and then create a model (model name should start from a capital letter)
+Now lets add a user to a db using this model
+whenever we do anything in the db (like add/delete a data) it will always return a promise to use async and await
+created a signup api call to add a data to user. Alwasy wrap things in try catch block to handle the errors properly.
+use postmane to call the signup api and see if the data is added in the mongodb. 
