@@ -55,3 +55,12 @@ How to push dynamic data to api.. Meaning the body data in the post call from th
 Diff btw javascript object and json
 
 To read the body data from the request -- we need a middleware (express.json) which we will use for all the apis to get the body in json format. if we dont use it and try to log req.body we will get undefined
+
+Tried these mongoos functions -- 
+User.save() --> to save the document in a db
+User.find() --> to fetch document from db we can pass filters inside like User.find({emailId: userEmail})
+User.findOne() --> to fetch only one document 
+User.findByIdAndDelete(id) --> to delete a record by id
+User.findByIdAndUpdate(id,datatoUpdate) --> to update an existing record
+
+

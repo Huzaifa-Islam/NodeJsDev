@@ -18,6 +18,82 @@ app.post("/signUp", async(req,res)=>{
   }
 })
 
+//Find user by email
+app.get("/user", async (req,res)=>{
+  console.log("call to get user is made")
+  const userEmail = req.body.emailId;
+  try{
+     const user = await User.find({emailId: userEmail})
+     if (user.length==0){
+      res.status(404).send("User not found")  
+     }
+     res.send(user);
+  }
+  catch(err){
+    res.status(400).send("Something went wrong")
+  }
+})
+// suppose two users with same email id and then only one user (i have seen only first one inserted in the db being returned)
+app.get("/getOneUser", async (req,res)=>{
+  console.log("call to get user is made")
+  const userEmail = req.body.emailId;
+  try{
+     const user = await User.findOne({emailId: userEmail})
+     if (user.length==0){
+      res.status(404).send("User not found")  
+     }
+     res.send(user);
+  }
+  catch(err){
+    res.status(400).send("Something went wrong")
+  }
+})
+
+//Feed Api - get all the users from the database
+app.get("/feed", async(req,res)=>{
+
+  try{
+    const users = await User.find();
+    if (users.length==0){
+      res.status(404).send("No users")
+    }
+    res.send(users)
+  }
+  catch(err){
+res.status(400).send("Something went wrong")
+  }
+})
+
+//delete a user
+app.delete("/user", async(req,res)=>{
+  const userId = req.body.userId;
+  console.log("delete request made", userId)
+  try{
+//    const user = await User.findByIdAndDelete({id:userId}) // we can do it like this or the way i have done it below    
+    const user = await User.findByIdAndDelete(userId)
+    res.send("User deleted successfully")
+  }
+  catch(err){
+    res.status(400).send("Something went wrong")
+  }
+})
+
+//update data of the user
+app.patch("/user", async(req,res)=>{
+  const userId = req.body.userId;
+  const data = req.body
+  try{
+    const user = await User.findByIdAndUpdate({_id:userId}, data, {
+      returnDocument:"before",
+    });
+    console.log("trying third parameter options which is optional .. read the official docs "+ user)
+    res.send("User updated successfully")
+  }
+  catch(err){
+    res.status(400).send("Something went wrong");
+  }
+})
+
 connectDB().then(()=>{
   console.log("Databse connection established...")
   app.listen(3000, () => {
