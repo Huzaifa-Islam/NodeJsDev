@@ -68,3 +68,9 @@ we can put strict checks in the schema only (read mongoose docs)
 used these validation things -- minLength, maxLenght, min, max, required, unique, validate, lowercase, trim, default
 validate dont work on the patch api to make it work we have set runValidators as true as a parameter in the findByIdAndUpdate function
 In the schema there can be another parameter where we can set timestamps as true so as to see when the user signed up or updated the info 
+
+
+npm install validator
+lets encrypt the password-- we will use npm pacakge bcrypt
+created signup api and store hashed password
+then created login api and handled error scenarios 
