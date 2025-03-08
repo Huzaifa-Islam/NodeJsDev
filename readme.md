@@ -91,3 +91,7 @@ Cookies can also be expired and we can pass other options like httpOnly in res.c
 Lets write an auth middleware
 
 Lets offload few thigns like creating a token to model file called as schema methods.
+
+Lets list down list of apis that we will to build
+Group multiple routes under respective routers
+we will use express Router
