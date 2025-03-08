@@ -75,3 +75,17 @@ npm install validator
 lets encrypt the password-- we will use npm pacakge bcrypt
 created signup api and store hashed password
 then created login api and handle error scenarios properly. In the error msg never leak any sensitive info like email do not exist in DB. give generic messages like invalid creds.
+
+Lets use some advanced authentication techniques like JWT token. How cookies is used. cookie parser (to read a cookie at the server side). Create an auth middleware. Validata users.
+Whenver user logs in, server will create a jwt token store it inside a cookie and send it back via a response. expiry time for the token can be set. Now whenever a user makes a new call, this token has to be a part of the req coming from the client and server will validate the token first. If success the user req will be served or else the user will be redirected to the login page.
+
+npm i cookie-parser
+we need this to read the cookie at the server just like we need express.json to read the json request
+
+Lets install the jsonwebtoken -- npm i jsonwebtoken
+jwt.sign(<give the user id>, <SecretKey>) it will create a new token
+jwt.verify(<tokenThatComesAsCookie>, <SecretKey>) it will verify the token and give the object containing user id and iat (added by jwt).
+Then we can find the user by id 
+To expire a toke, jwt.sign recieves a third argument as expiresIn there we can give the time till when the token should be active
+Cookies can also be expired and we can pass other options like httpOnly in res.cookies read the documen on expressjs.com
+Lets write an auth middleware

@@ -5,8 +5,12 @@ const User = require("./models/user")
 const {validateSignUpData} = require("./utils/validation");
 const { blacklist } = require("validator");
 const bcrypt = require("bcrypt");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
+const {userAuth} = require("./middlewares/auth");
 
 app.use(express.json()); // to read the body coming from the request 
+app.use(cookieParser())
 
 app.post("/signUp", async(req,res)=>{
   
@@ -44,6 +48,16 @@ app.post("/login", async(req,res)=>{
 
     const isPassword = bcrypt.compareSync(password, user.password) 
     if (isPassword){
+      // write a jwt token logic here
+      const token = await jwt.sign({_id: user._id},"SecretKeyJWT!@#$%12345Done", {expiresIn: "1d"})
+      console.log("token", token)
+
+      // pass it as a cookie in the response 
+      res.cookie(
+        "token", token, {
+          expires: new Date(Date.now() + 3600000)
+        }
+      )
       res.send("User Logged in Successfully")
     }
     else{
@@ -55,81 +69,16 @@ app.post("/login", async(req,res)=>{
   }
 })
 
-//Find user by email
-app.get("/user", async (req,res)=>{
-  console.log("call to get user is made")
-  const userEmail = req.body.emailId;
-  try{
-     const user = await User.find({emailId: userEmail})
-     if (user.length==0){
-      res.status(404).send("User not found")  
-     }
-     res.send(user);
-  }
-  catch(err){
-    res.status(400).send("Something went wrong")
-  }
-})
-// suppose two users with same email id and then only one user (i have seen only first one inserted in the db being returned)
-app.get("/getOneUser", async (req,res)=>{
-  console.log("call to get user is made")
-  const userEmail = req.body.emailId;
-  try{
-     const user = await User.findOne({emailId: userEmail})
-     if (user.length==0){
-      res.status(404).send("User not found")  
-     }
-     res.send(user);
-  }
-  catch(err){
-    res.status(400).send("Something went wrong")
-  }
+app.get("/profile", userAuth ,async(req,res)=>{
+  const user = req.user;
+  res.send( user)
 })
 
-//Feed Api - get all the users from the database
-app.get("/feed", async(req,res)=>{
+app.post("/sendConnectionRequest", userAuth ,async(req,res)=>{
+  const user = req.user;
+  console.log("sending a connection req");
+  res.send(user.firstName + " send the connection req");
 
-  try{
-    const users = await User.find();
-    if (users.length==0){
-      res.status(404).send("No users")
-    }
-    res.send(users)
-  }
-  catch(err){
-res.status(400).send("Something went wrong")
-  }
-})
-
-//delete a user
-app.delete("/user", async(req,res)=>{
-  const userId = req.body.userId;
-  console.log("delete request made", userId)
-  try{
-//    const user = await User.findByIdAndDelete({id:userId}) // we can do it like this or the way i have done it below    
-    const user = await User.findByIdAndDelete(userId)
-    res.send("User deleted successfully")
-  }
-  catch(err){
-    res.status(400).send("Something went wrong")
-  }
-})
-
-//update data of the user
-app.patch("/user", async(req,res)=>{
-  const userId = req.body.userId;
-  const data = req.body
-  try{
-    const user = await User.findByIdAndUpdate({_id:userId}, data, {
-      returnDocument:"before",
-      runValidators:true
-    });
-    console.log("trying third parameter options which is optional .. read the official docs "+ user)
-    res.send("User updated successfully")
-  }
-  catch(err){
-    res.status(400).send("Something went wrong --"+err.message);
-  }
 })
 
 connectDB().then(()=>{
