@@ -44,9 +44,9 @@ So once db connection is successfully established we will start the server in th
 
 Now we will create a schema and then create a model (model name should start from a capital letter)
 Now lets add a user to a db using this model
-whenever we do anything in the db (like add/delete a data) it will always return a promise to use async and await
+whenever we do anything in the db (like add/delete a data) it will always return a promise so use async and await
 created a signup api call to add a data to user. Alwasy wrap things in try catch block to handle the errors properly.
-use postmane to call the signup api and see if the data is added in the mongodb. 
+use postman to call the signup api and see if the data is added in the mongodb. 
 devTinder(databse)--users(collection)--documents(user which gets added)--fields(name, emailId, pwd that the document contains)
 Two fields _id and __v is added by mongo db on its own
 
@@ -56,7 +56,7 @@ Diff btw javascript object and json
 
 To read the body data from the request -- we need a middleware (express.json) which we will use for all the apis to get the body in json format. if we dont use it and try to log req.body we will get undefined
 
-Tried these mongoos functions -- 
+Tried these mongoose functions -- 
 User.save() --> to save the document in a db
 User.find() --> to fetch document from db we can pass filters inside like User.find({emailId: userEmail})
 User.findOne() --> to fetch only one document 
@@ -66,11 +66,12 @@ User.findByIdAndUpdate(id,datatoUpdate) --> to update an existing record
 Lets do some data sanitization and put some validations as  our database is vulnerable.. User can insert any data into our db
 we can put strict checks in the schema only (read mongoose docs)
 used these validation things -- minLength, maxLenght, min, max, required, unique, validate, lowercase, trim, default
-validate dont work on the patch api to make it work we have set runValidators as true as a parameter in the findByIdAndUpdate function
-In the schema there can be another parameter where we can set timestamps as true so as to see when the user signed up or updated the info 
+validate dont work on the patch api to make it work we have to set runValidators as true as a parameter in the findByIdAndUpdate function.
+In the schema there can be another parameter where we can set timestamps as true so as to see when the user signed up or updated the info.
 
+we can use validator library from npm to validate strings only like email, strong pwd, etc. Refer to doc. 
+npm install validator 
 
-npm install validator
 lets encrypt the password-- we will use npm pacakge bcrypt
 created signup api and store hashed password
-then created login api and handled error scenarios 
+then created login api and handle error scenarios properly. In the error msg never leak any sensitive info like email do not exist in DB. give generic messages like invalid creds.
