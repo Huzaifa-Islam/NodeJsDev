@@ -89,3 +89,5 @@ Then we can find the user by id
 To expire a toke, jwt.sign recieves a third argument as expiresIn there we can give the time till when the token should be active
 Cookies can also be expired and we can pass other options like httpOnly in res.cookies read the documen on expressjs.com
 Lets write an auth middleware
+
+Lets offload few thigns like creating a token to model file called as schema methods.

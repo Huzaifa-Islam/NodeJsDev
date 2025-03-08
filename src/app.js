@@ -46,10 +46,10 @@ app.post("/login", async(req,res)=>{
      throw new Error("Invalid credentials")
     }
 
-    const isPassword = bcrypt.compareSync(password, user.password) 
+    const isPassword = user.validatePassword(password)
     if (isPassword){
       // write a jwt token logic here
-      const token = await jwt.sign({_id: user._id},"SecretKeyJWT!@#$%12345Done", {expiresIn: "1d"})
+      const token = await user.getJWT();
       console.log("token", token)
 
       // pass it as a cookie in the response 
