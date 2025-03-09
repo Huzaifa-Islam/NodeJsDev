@@ -95,3 +95,5 @@ Lets offload few thigns like creating a token to model file called as schema met
 Lets list down list of apis that we will to build
 Group multiple routes under respective routers
 we will use express Router
+
+Schema Validation - "pre" which is called before .save happens. So we can also use schema validations just like we use schema methods. again in shcema validation use older funciton method not the arrow function
