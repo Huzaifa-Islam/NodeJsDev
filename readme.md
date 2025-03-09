@@ -96,4 +96,13 @@ Lets list down list of apis that we will to build
 Group multiple routes under respective routers
 we will use express Router
 
-Schema Validation - "pre" which is called before .save happens. So we can also use schema validations just like we use schema methods. again in shcema validation use older funciton method not the arrow function
+Schema Validation - "pre" function which is called before .save happens. So we can also use schema validations just like we use schema methods. again in shcema validation use older funciton method not the arrow function
+
+Read about logical queries $or, $and, etc on mongodb
+
+Whenever there are many records like in millions the search query becomes expensive and takes a lot of time to process. So there is concpet of index which can be attached to the schema and it makes query faster. read more about this on mongoose.
+There is a concept of compound indexes as well for queries where there is or/and , etc operations. read about it on mongodb 
+like for user schema if we want to put index on first name we can do it like -- userSchema.index({firstName:1})
+if we want to query firstName and lastName of a user together then its called compound indexes -- userSchema.index({firstName:1, lastName:1})
+Creating indexes unnecessarily also comes with a cost.. so make indexes optimally for required fields only. 
+
