@@ -106,3 +106,18 @@ like for user schema if we want to put index on first name we can do it like -- 
 if we want to query firstName and lastName of a user together then its called compound indexes -- userSchema.index({firstName:1, lastName:1})
 Creating indexes unnecessarily also comes with a cost.. so make indexes optimally for required fields only. 
 
+ref and populate in mongoose. Read the docs. (to make connection btw two collections)
+
+Read about $nin, $ne and other querie operators
+
+Add pagination
+/feed?page=1&limit=10 => 1-10 first 10 users
+/feed?page=2&limit=10 => 11-20
+/feed?page=3&limit=10 => 21-30 
+
+In mongoDB two important functions .skip() and .limit()
+
+
+/feed?page=1&limit=10 => 1-10   ==> .skip(0) & .limit(10)
+/feed?page=2&limit=10 => 11-20  ==> .skip(10) & .limit(10)
+/feed?page=3&limit=10 => 21-30  ==> .skip(20) & .limit(10)

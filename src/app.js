@@ -2,8 +2,9 @@ const express = require("express");
 const connectDB = require('./config/database')
 const app = express();
 const cookieParser = require("cookie-parser");
+const cors = require("cors"); // to allow the request from different domain
 
-
+app.use(cors())
 app.use(express.json()); // to read the body coming from the request 
 app.use(cookieParser())
 
