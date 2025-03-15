@@ -8,7 +8,8 @@ const userAuth = async (req, res, next) => {
 
     // Validate the token
     if (!token) {
-      throw new Error("Token is not found");
+    //  throw new Error("Token is not found");
+      return res.status(401).send("Please login")
     }
 
     const decoded = await jwt.verify(token, "SecretKeyJWT!@#$%12345Done");
