@@ -4,7 +4,12 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const cors = require("cors"); // to allow the request from different domain
 
-app.use(cors())
+app.use(cors(
+  {
+    origin:"http://localhost:5173",
+    credentials:true
+  }
+))
 app.use(express.json()); // to read the body coming from the request 
 app.use(cookieParser())
 
